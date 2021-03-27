@@ -34,17 +34,17 @@
                 <h3>Income</h3>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Amount User makes per week</h4>
+                        <h4 class="card-title">${weeklyIncome }</h4>
                         <p class="card-text"></p>
                     </div>
                 </div>
-                <h6 class="text-center text-muted mb-2">Amount per Yer</h6>
+                <h6 class="text-center text-muted mb-2">Amount per month</h6>
             </div>
             <div class="col">
                 <h3>Expense</h3>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Amount User spends per week</h4>
+                        <h4 class="card-title">${weeklyExpenses}</h4>
                         <p class="card-text"></p>
                     </div>
                 </div>
@@ -54,11 +54,11 @@
                 <h3>Savings</h3>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Bank Account</h4>
+                        <h4 class="card-title">${savings.checkingBalance }</h4>
                         <p class="card-text"></p>
                     </div>
                 </div>
-                <h6 class="text-center text-muted mb-2">Savings Account</h6>
+                <h6 class="text-center text-muted mb-2">${savings.savingBalance }</h6>
             </div>
         </div>
     </div>

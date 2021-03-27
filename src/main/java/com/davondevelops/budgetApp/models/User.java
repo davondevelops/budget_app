@@ -42,7 +42,7 @@ public class User {
     private List<Expenses> expenses;
     
     @OneToMany(mappedBy="user", fetch= FetchType.LAZY)
-    private List<Revenues> revenues;
+    private List<Income> Income;
     
     @OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch= FetchType.LAZY)
     private Savings savings;
@@ -115,12 +115,12 @@ public class User {
 		this.expenses = expenses;
 	}
 
-	public List<Revenues> getRevenues() {
-		return revenues;
+	public List<Income> getRevenues() {
+		return Income;
 	}
 
-	public void setRevenues(List<Revenues> revenues) {
-		this.revenues = revenues;
+	public void setRevenues(List<Income> revenues) {
+		this.Income = revenues;
 	}
 
 	public Savings getSavings() {

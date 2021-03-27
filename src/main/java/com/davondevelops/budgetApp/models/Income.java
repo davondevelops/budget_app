@@ -2,7 +2,6 @@ package com.davondevelops.budgetApp.models;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,29 +10,27 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 @Entity
-@Table(name="expenses")
-public class Expenses {
+@Table(name="income")
+public class Income {
 	
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String Name;
-	private int frequency;
+	private String name;
+	private int frequecy;
+	@Min(0)
 	private float amount;
 	private String date;
-	@Column(updatable=false)
-	private Date createdAt;
-	private Date updatedAt;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user")
+	@JoinColumn(name= "user")
 	private User user;
 	
 
-	
-	public Expenses() {
-		
+
+	public Income() {
 	}
 
 	public Long getId() {
@@ -45,19 +42,19 @@ public class Expenses {
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
-	public int getFrequency() {
-		return frequency;
+	public int getFrequecy() {
+		return frequecy;
 	}
 
-	public void setFrequency(int frequency) {
-		this.frequency = frequency;
+	public void setFrequecy(int frequecy) {
+		this.frequecy = frequecy;
 	}
 
 	public float getAmount() {
@@ -66,22 +63,6 @@ public class Expenses {
 
 	public void setAmount(float amount) {
 		this.amount = amount;
-	}
-
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
 	}
 
 	public User getUser() {
@@ -99,6 +80,7 @@ public class Expenses {
 	public void setDate(String date) {
 		this.date = date;
 	}
+
 
 
 

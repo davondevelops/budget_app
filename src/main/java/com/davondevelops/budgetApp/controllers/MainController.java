@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.davondevelops.budgetApp.models.Expenses;
-import com.davondevelops.budgetApp.models.Revenues;
+import com.davondevelops.budgetApp.models.Income;
 import com.davondevelops.budgetApp.models.Savings;
 import com.davondevelops.budgetApp.models.User;
 import com.davondevelops.budgetApp.services.MainService;
@@ -61,7 +61,7 @@ public class MainController {
 	public String login(HttpSession session, @RequestParam("email") String email,@RequestParam("password") String password, RedirectAttributes result) {
 		if(userService.authenticateUser(email, password)) {
 			session.setAttribute("loggedInUser", userService.findByEmail(email));
-			return "redirect:/welcome";
+			return "redirect:/dashboard";
 		}
 		else {
 			result.addFlashAttribute("error", "Invalid Login Attempt");
@@ -82,7 +82,7 @@ public class MainController {
 	}
 	
 	@RequestMapping("/revenues/new")
-	public String newRevenues(@ModelAttribute("revenue") Revenues revenue, HttpSession session, Model model) {
+	public String newRevenues(@ModelAttribute("income") Income income, HttpSession session, Model model) {
 		User user= (User) session.getAttribute("loggedInUser");
 		if(user==null) {
 			return "redirect:/";
@@ -95,7 +95,7 @@ public class MainController {
 	}
 	
 	@PostMapping("/revenue/add")
-	public String addRevenue(@Valid @ModelAttribute("revenue") Revenues revenue, BindingResult result, HttpSession session ) {
+	public String addRevenue(@Valid @ModelAttribute("income") Income income, BindingResult result, HttpSession session ) {
 		User user= (User) session.getAttribute("loggedInUser");
 		if(user==null) {
 			return "redirect:/";
@@ -104,7 +104,7 @@ public class MainController {
 			if(result.hasErrors()) {
 				return "newRevenue.jsp";
 			}
-			mainService.newRevenue(revenue);
+			mainService.newRevenue(income);
 			return "redirect:/revenue/more";
 		}
 	}
@@ -142,7 +142,7 @@ public class MainController {
 				return "newExpense.jsp";
 			}
 			mainService.newExpense(expense);
-			return "redirect:/expense/more";
+			return "redirect:/expenses/more";
 		}
 	}
 	
@@ -182,13 +182,13 @@ public class MainController {
 		if(user==null) {
 			return "redirect:/";
 		}
-		List <Expenses>expenses=mainService.findExpenses(user);
+		float weeklyIncome= mainService.calculateWeeklyIncome(user);
 		Savings savings=mainService.findSavings(user);
-		List <Revenues> revenues=mainService.findRevenues(user);
+		float weeklyExpenses= mainService.calculateWeeklyExpenses(user);
 		model.addAttribute("user", user);
-		model.addAttribute("revenues", revenues);
+		model.addAttribute("weeklyExpenses", weeklyExpenses);
 		model.addAttribute("savings", savings);
-		model.addAttribute("expenses", expenses);
+		model.addAttribute("weeklyIncome", weeklyIncome);
 		return "dashboard.jsp";
 	}
 	
@@ -200,9 +200,9 @@ public class MainController {
 		}
 		List <Expenses>expenses=mainService.findExpenses(user);
 		Savings savings=mainService.findSavings(user);
-		List <Revenues> revenues=mainService.findRevenues(user);
+		List <Income> income=mainService.findRevenues(user);
 		model.addAttribute("user", user);
-		model.addAttribute("revenues", revenues);
+		model.addAttribute("income", income);
 		model.addAttribute("savings", savings);
 		model.addAttribute("expenses", expenses);
 		return "schedule.jsp";

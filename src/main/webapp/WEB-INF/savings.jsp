@@ -14,7 +14,7 @@
 		<form:form class="form-group col-8 mx-auto" action="/savings/update" method="POST" modelAttribute="savings">
 			<h3>Enter Savings (optional)</h3>
 			
-			<form:hidden path="user_id" value="${user.id }"/>
+			<form:hidden path="user" value="${user.id }"/>
 			
 			<form:label path="checkingBalance">Checking Balance</form:label>
 			<form:errors class="text-danger" path="checkingBalance"/>
