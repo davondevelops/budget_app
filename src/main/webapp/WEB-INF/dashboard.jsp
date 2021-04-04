@@ -13,11 +13,11 @@
 <body>
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
         <div class="container"><a class="navbar-brand" href="#">Budgetapp</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1"><a class="text-dark" href="#">Add new Expense</a><a class="text-dark" href="#">Add new goal</a><a class="text-dark" href="#">Am I on track?</a>
+            <div class="collapse navbar-collapse" id="navcol-1"><a class="text-dark" href="expense/new">Add new Expense</a><a class="text-dark" href="#">Add new goal</a><a class="text-dark" href="#">Am I on track?</a>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"></li>
                     <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">Account</a>
-                        <div class="dropdown-menu"><a class="dropdown-item" href="/schedule">Schedule</a><a class="dropdown-item" href="#">Add Revenue</a><a class="dropdown-item" href="#">View Savings<br></a><a class="dropdown-item" href="#">Edit Savings</a><a class="dropdown-item" href="#">Achievements</a><a class="dropdown-item" href="#">Account Info</a></div>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="/schedule">Schedule</a><a class="dropdown-item" href="revenues/new">Add Revenue</a><a class="dropdown-item" href="#">View Savings<br></a><a class="dropdown-item" href="savings/add">Edit Savings</a><a class="dropdown-item" href="#">Achievements</a><a class="dropdown-item" href="#">Account Info</a></div>
                     </li>
                 </ul><button class="btn btn-danger border rounded-pill" id="nav-btn" type="button">Logout</button><span class="navbar-text actions"> </span>
             </div>
@@ -34,31 +34,31 @@
                 <h3>Income</h3>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">${weeklyIncome }</h4>
+                        <h4 class="card-title">Week's: ${weeklyIncome }</h4>
                         <p class="card-text"></p>
                     </div>
                 </div>
-                <h6 class="text-center text-muted mb-2">Amount per month</h6>
+                <h6 class="text-center text-muted mb-2">Month's: ${monthlyIncome }</h6>
             </div>
             <div class="col">
                 <h3>Expense</h3>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">${weeklyExpenses}</h4>
+                        <h4 class="card-title">Week's: ${weeklyExpenses}</h4>
                         <p class="card-text"></p>
                     </div>
                 </div>
-                <h6 class="text-center text-muted mb-2">Amount per Yer</h6>
+                <h6 class="text-center text-muted mb-2">Month's: ${monthlyExpenses }</h6>
             </div>
             <div class="col">
                 <h3>Savings</h3>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">${savings.checkingBalance }</h4>
+                        <h4 class="card-title">Checkings: ${savings.checkingBalance }</h4>
                         <p class="card-text"></p>
                     </div>
                 </div>
-                <h6 class="text-center text-muted mb-2">${savings.savingBalance }</h6>
+                <h6 class="text-center text-muted mb-2">Savings: ${savings.savingBalance }</h6>
             </div>
         </div>
     </div>

@@ -89,4 +89,58 @@ public class MainService {
 		}
 		return weeklyExpenses;
 	}	
+	@SuppressWarnings("deprecation")
+	public float calculateMonthlyIncome(User user)
+	{
+		Date todayDate= new Date();
+		Calendar today = Calendar.getInstance();
+		today.setTime(todayDate);
+		float monthlyIncome=0;
+		
+		int month=today.get(today.MONTH)+1;
+		int year=today.get(today.YEAR);
+		Date tempDate=new Date();
+		tempDate.setDate(1);
+		int tempDay=1;
+		int tempMonth=tempDate.getMonth()+1;
+		while(tempMonth==month) {
+			String current= year+"-"+month+"-"+tempDay;//
+			List <Income> dayIncome= incomeRepo.findByDateAndUser(current, user);
+			for (Income income:dayIncome){
+				monthlyIncome+= income.getAmount();
+			}
+			tempDay++;
+			tempDate.setDate(tempDay);
+			tempMonth=tempDate.getMonth()+1;
+
+		}
+		return monthlyIncome;
+	}
+	@SuppressWarnings("deprecation")
+	public float calculateMonthlyExpense(User user)
+	{
+		Date todayDate= new Date();
+		Calendar today = Calendar.getInstance();
+		today.setTime(todayDate);
+		float monthlyExpenses=0;
+		
+		int month=today.get(today.MONTH)+1;
+		int year=today.get(today.YEAR);
+		Date tempDate=new Date();
+		tempDate.setDate(1);
+		int tempDay=1;
+		int tempMonth=tempDate.getMonth()+1;
+		while(tempMonth==month) {
+			String current= year+"-"+month+"-"+tempDay;//
+			List <Expenses> dayExpenses= expenseRepo.findByDateAndUser(current, user);
+			for (Expenses expense:dayExpenses){
+				monthlyExpenses+= expense.getAmount();
+			}
+			tempDay++;
+			tempDate.setDate(tempDay);
+			tempMonth=tempDate.getMonth()+1;
+
+		}
+		return monthlyExpenses;
+	}
 }

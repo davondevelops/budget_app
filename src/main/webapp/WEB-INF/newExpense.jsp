@@ -40,7 +40,7 @@
 			
 			<input type="submit" value="Add Expense"/>
 		</form:form>
-		<a href="/dashboard"><button class="btn btn-seconday">Home</button></a>
+		<a href="/dashboard"><button class="btn btn-primary">Home</button></a>
 	</div>
 </body>
 </html>

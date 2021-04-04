@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -157,16 +158,18 @@ public class MainController {
 	
 	
 	@RequestMapping("/savings/add")
-	public String addSavings(@ModelAttribute("savings") Savings savings, HttpSession session, Model model) {
+	public String addSavings( HttpSession session, Model model) {
 		User user= (User) session.getAttribute("loggedInUser");
 		if(user==null) {
 			return "redirect:/";
 		}
 		model.addAttribute("user",user);
+		Savings savings=mainService.findSavings(user);
+		model.addAttribute("savings", savings);
 		return "savings.jsp";
 	}
 	
-	@PostMapping("/savings/update")
+	@PutMapping("/savings/update")
 	public String updateSavings(@Valid @ModelAttribute("savings") Savings savings, BindingResult result, HttpSession session ) {
 		User user =(User) session.getAttribute("loggedInUser");
 		if(user==null) {
@@ -185,10 +188,14 @@ public class MainController {
 		float weeklyIncome= mainService.calculateWeeklyIncome(user);
 		Savings savings=mainService.findSavings(user);
 		float weeklyExpenses= mainService.calculateWeeklyExpenses(user);
+		float monthlyIncome= mainService.calculateMonthlyIncome(user);
+		float monthlyExpense=mainService.calculateMonthlyExpense(user);
 		model.addAttribute("user", user);
 		model.addAttribute("weeklyExpenses", weeklyExpenses);
 		model.addAttribute("savings", savings);
 		model.addAttribute("weeklyIncome", weeklyIncome);
+		model.addAttribute("monthlyIncome", monthlyIncome);
+		model.addAttribute("monthlyExpenses", monthlyExpense);
 		return "dashboard.jsp";
 	}
 	

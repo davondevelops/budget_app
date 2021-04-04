@@ -12,6 +12,7 @@
 <body>
 	<div class=	"container w-75 p-3 mx-auto">
 		<form:form class="form-group col-8 mx-auto" action="/savings/update" method="POST" modelAttribute="savings">
+		<input type="hidden" name="_method" value="put">
 			<h3>Enter Savings (optional)</h3>
 			
 			<form:hidden path="user" value="${user.id }"/>
